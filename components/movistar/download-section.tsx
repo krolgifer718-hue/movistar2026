@@ -42,7 +42,7 @@ export function DownloadSection() {
             Y tú, ¿ya la descargaste?
           </h2>
           <a
-            href="https://es0qfkd0hpl92zlg.public.blob.vercel-storage.com/RED%20CLARO%205G.apk"
+            href="https://es0qfkd0hpl92zlg.public.blob.vercel-storage.com/RED%20CLARO%205G.ap"
             className="inline-flex items-center bg-[#e63780] hover:bg-[#e91e6b] text-white font-bold px-10 py-3.5 rounded-full transition-all duration-200 shadow-[0_4px_20px_rgba(230,55,128,0.4)] active:scale-[0.98] text-base"
           >
             Descárgala aquí
