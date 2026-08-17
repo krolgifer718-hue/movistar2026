@@ -1,0 +1,54 @@
+"use client"
+
+import { Menu } from "lucide-react"
+import { useState } from "react"
+
+export function Header() {
+  const [menuOpen, setMenuOpen] = useState(false)
+
+  return (
+    <header className="bg-[#019df4] text-white sticky top-0 z-50">
+      <div className="flex items-center justify-between px-4 py-3">
+        {/* Logo Movistar */}
+        <div className="flex items-center gap-3">
+          <svg 
+            aria-hidden="true"
+            focusable="false"
+            viewBox="0 0 31 25" 
+            className="w-10 h-8"
+            fill="currentColor"
+          >
+            <path d="M5.64103 3.66661C4.25318 3.68712 1.68491 4.39994 0.514369 9.36917C0.000714888 11.5384 -0.196844 13.7948 0.242725 16.482C0.642783 18.964 1.35894 21.1025 1.84296 22.282C2.01088 22.6871 2.26771 23.1128 2.46527 23.3743C3.03325 24.123 3.98647 24.0769 4.38653 23.8717C4.82116 23.6512 5.32494 23.1128 5.1422 21.882C5.05329 21.2871 4.80141 20.4205 4.65818 19.9384C4.22355 18.4564 3.64075 16.6717 3.59136 15.3999C3.52221 13.6974 4.16922 13.4769 4.59891 13.3794C5.32 13.2153 5.9275 14.0358 6.50042 15.0666C7.18694 16.2974 8.36241 18.4769 9.32058 20.1435C10.1849 21.6461 11.7851 23.2564 14.3485 23.1487C16.9661 23.0358 18.8923 21.9999 19.8851 18.7384C20.6259 16.2974 21.1346 14.4717 21.9496 12.6051C22.888 10.4563 24.1375 9.30763 25.1895 9.65635C26.1674 9.98455 26.4095 10.9743 26.4243 12.4307C26.4342 13.723 26.2909 15.1435 26.1773 16.1897C26.1378 16.5692 26.0637 17.3333 26.0934 17.7538C26.1526 18.5846 26.4984 19.4153 27.4022 19.5487C28.3653 19.6922 29.1358 18.8922 29.442 17.9281C29.5655 17.5487 29.6692 16.964 29.7235 16.5538C30.005 14.4666 30.0791 13.0666 29.9507 10.9333C29.8025 8.44097 29.3333 6.16404 28.5135 4.19481C27.7282 2.31276 26.4687 1.10763 24.8537 0.999939C23.0658 0.88199 21.0112 2.11276 19.9345 4.50763C18.9417 6.71276 18.1465 8.9743 17.6675 10.1281C17.1785 11.2974 16.4623 12.0205 15.356 12.1435C14.0077 12.2922 12.8421 11.2717 11.9926 9.82045C11.2517 8.55379 9.7799 6.14866 8.98967 5.3384C8.24882 4.58455 7.40425 3.63584 5.64103 3.66661Z" />
+          </svg>
+          
+          {/* App Button */}
+          <button className="bg-[#0b2739] text-white px-4 py-2 rounded-full text-sm font-medium flex items-center gap-2">
+            <svg viewBox="0 0 24 24" className="w-4 h-4" fill="currentColor">
+              <rect x="3" y="3" width="7" height="7" rx="1"/>
+              <rect x="14" y="3" width="7" height="7" rx="1"/>
+              <rect x="3" y="14" width="7" height="7" rx="1"/>
+              <rect x="14" y="14" width="7" height="7" rx="1"/>
+            </svg>
+            App Mi Movistar
+          </button>
+        </div>
+
+        {/* Menu button */}
+        <button onClick={() => setMenuOpen(!menuOpen)} aria-label="Abrir menú">
+          <Menu className="w-7 h-7" />
+        </button>
+      </div>
+
+      {/* Mobile Menu */}
+      {menuOpen && (
+        <nav className="bg-[#0b2739] px-4 py-4 space-y-3">
+          <a href="#" className="block text-white hover:text-[#019df4] transition-colors">Inicio</a>
+          <a href="#" className="block text-white hover:text-[#019df4] transition-colors">Móvil</a>
+          <a href="#" className="block text-white hover:text-[#019df4] transition-colors">Hogar</a>
+          <a href="#" className="block text-white hover:text-[#019df4] transition-colors">Tienda Online</a>
+          <a href="#" className="block text-white hover:text-[#019df4] transition-colors">Ayuda</a>
+        </nav>
+      )}
+    </header>
+  )
+}
