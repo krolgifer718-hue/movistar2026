@@ -23,3 +23,6 @@ Thumbs.db
 # Debug
 npm-debug.log*
 pnpm-debug.log*
+
+# APK (no viaja por git — ver DEPLOY.md §4)
+*.apk
