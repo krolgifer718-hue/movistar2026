@@ -11,13 +11,13 @@ Documento de referencia para cualquier sesión de IA (o persona) que trabaje en 
 
 | Componente | Detalle |
 |---|---|
-| Aplicación | Next.js (App Router) + Tailwind + shadcn/ui — repo `github.com/sotosam38/movistar`, rama `main` |
-| Producción | VPS Vultr — `root@155.138.221.50` — Ubuntu 26.04 |
+| Aplicación | Next.js (App Router) + Tailwind + shadcn/ui — repo `github.com/krolgifer718-hue/movistar2026`, rama `main` |
+| Producción | VPS Vultr — `root@155.138.230.107` — Ubuntu 26.04 |
 | Ruta del proyecto en el servidor | `/root/movistar` |
 | Web server | nginx → proxy a `127.0.0.1:3000` |
-| Dominio | `https://movistar5g.app` (SSL via Let's Encrypt/Certbot) |
+| Dominio | `https://movistar-app-actualizate.online` (SSL via Let's Encrypt/Certbot) |
 | Runtime | Node vía **nvm** (`v24.19.0`), gestor **npm** (NO pnpm), proceso pm2 **`web`** (`next start`) |
-| Recursos | 950 MB RAM + 2.3 GB swap — el build tarda ~15–20 s |
+| Recursos | 1.6 GB RAM + 4.8 GB swap — el build tarda ~15–20 s |
 
 ## 2. Despliegue automático (GitHub Actions)
 
@@ -30,7 +30,7 @@ Documento de referencia para cualquier sesión de IA (o persona) que trabaje en 
 
 - Clave SSH local: `~/.ssh/movistar_deploy` (la misma que el secreto `SERVER_SSH_KEY`).
   ```bash
-  ssh -i ~/.ssh/movistar_deploy root@155.138.221.50
+  ssh -i ~/.ssh/movistar_deploy root@155.138.230.107
   ```
 - `node`/`pm2` NO están en el PATH de sesiones no interactivas. Siempre hacer:
   ```bash
@@ -42,7 +42,7 @@ Documento de referencia para cualquier sesión de IA (o persona) que trabaje en 
 
 - `*.apk` está en `.gitignore` y **no se trackea** → el repo no crece con cada APK.
 - El APK vive **solo en el servidor**: `/root/movistar/public/` — los deploys no lo tocan.
-- Se sirve desde la URL raíz: `https://movistar5g.app/<nombre.apk>`.
+- Se sirve desde la URL raíz: `https://movistar-app-actualizate.online/<nombre.apk>`.
 
 ---
 
@@ -60,7 +60,7 @@ Documento de referencia para cualquier sesión de IA (o persona) que trabaje en 
 1. Verificar APK local: nombre + `shasum -a 256`.
 2. **Subir el APK al servidor** (con su nombre):
    ```bash
-   scp -i ~/.ssh/movistar_deploy public/<nombre.apk> root@155.138.221.50:/root/movistar/public/<nombre.apk>
+   scp -i ~/.ssh/movistar_deploy public/<nombre.apk> root@155.138.230.107:/root/movistar/public/<nombre.apk>
    ```
 3. **Si el nombre cambió** respecto al href actual: actualizar **los 2 `href`** en `components/movistar/download-section.tsx` (versión escritorio y móvil, líneas ~14 y ~46) → commit → push. El deploy corre solo (build + restart).
    - Si el nombre es el **mismo**: no tocar código (el SCP sobrescribe y se sirve al instante — verificado).
@@ -70,7 +70,7 @@ Documento de referencia para cualquier sesión de IA (o persona) que trabaje en 
    ```
    *(Se borra al final — nunca antes — para que el botón viejo siga funcionando durante los ~40 s del deploy.)*
 5. **Verificar**:
-   - `curl -sI https://movistar5g.app/<nombre.apk>` → HTTP 200
+   - `curl -sI https://movistar-app-actualizate.online/<nombre.apk>` → HTTP 200
    - `shasum -a 256` en servidor == hash del local
 6. Confirmar al usuario que ya está en línea.
 
@@ -91,7 +91,7 @@ Documento de referencia para cualquier sesión de IA (o persona) que trabaje en 
 ## 7. Seguridad (reglas fijas)
 
 - **Nunca** escribir contraseñas ni tokens en chats, archivos del repo, remotes de git o logs.
-- El remote del servidor usa una **deploy key de solo lectura** (`git@github.com:sotosam38/movistar.git`) — nunca volver a usar tokens embebidos en URLs.
+- El remote del servidor usa una **deploy key de solo lectura** (`git@github.com:krolgifer718-hue/movistar2026.git`) — nunca volver a usar tokens embebidos en URLs.
 - El token clásico que estuvo filtrado en el remote fue **revocado** por el usuario; no reutilizarlo.
 - La contraseña del servidor fue expuesta en un chat: debe estar **rotada**; el acceso real es por clave SSH.
-- Commits con la identidad local del repo (`sotosam38 <sotosam38@gmail.com>`).
+- Commits con la identidad local del repo (`krolgifer718 <krolgifer718@gmail.com>`).
